@@ -21,6 +21,8 @@ The program breaks down data into four different categories
 	* Station statistics
 	* Trip duration statistics
 	* User/gender statistics
+||||||| parent of c33c9e1... Added documentation to README file
+Describe what your project is about and what it does
 
 ### Files used
 data/chicago.csv
