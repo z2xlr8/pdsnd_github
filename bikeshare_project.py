@@ -141,6 +141,7 @@ def get_filters():
         
     print('-'*40)
     
+
     #city_str, month_str, day_str - used to provide decriptive data in results
     city_str = city.title()
     month_str = month.title()
@@ -259,7 +260,6 @@ def time_stats(df, city_str, month_str, day_str):
 #-----------------------------------------------------------------------------------------------
 
 def convert_hour_am_pm(hour):
-
     """converts from 24 hour format and adds AM or PM to provide a more decriptive hour output"""
     if hour > 12:
         hour = hour - 12
