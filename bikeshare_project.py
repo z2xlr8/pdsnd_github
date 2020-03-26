@@ -141,7 +141,6 @@ def get_filters():
         
     print('-'*40)
     
-
     #city_str, month_str, day_str - used to provide decriptive data in results
     city_str = city.title()
     month_str = month.title()
