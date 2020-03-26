@@ -53,7 +53,8 @@ def get_filters():
     while True:
         try:
             city = input("Please select one of the following cities:\n(1) Chicago\n(2) New York City\n(3) Washington\nGet data for: ").lower()
-           
+            
+            """ convert numerical option data to alpha numeric equivalent """
             if city == '1':
                 city = 'chicago'
             elif city == '2':
@@ -110,6 +111,7 @@ def get_filters():
         try:
             day = input("\nSelect a day of the week:\n(1) Sunday\n(2) Monday\n(3) Tuesday\n(4) Wednesday\n(5) Thursday\n(6) Friday\n(7) Saturday\n(8) All, to select the entire week\nGet data for: ").lower()
  
+            """ convert numerical option data to alpha numeric equivalent """
             if day == 'sun' or day == '1':
                 day = 'sunday'
             elif day == 'mon' or day == '2':
@@ -139,14 +141,17 @@ def get_filters():
         
     print('-'*40)
     
+    #city_str, month_str, day_str - used to provide decriptive data in results
+    city_str = city.title()
     month_str = month.title()
     day_str = day.title()
     
+    #city, month, day - used in data analysis
     city = city_dic[city]
     month = month_dic[month]
     day = week_dic[day]
 
-    return city, month, day, month_str, day_str
+    return city, month, day, city_str, month_str, day_str
 
 #-----------------------------------------------------------------------------------------------
 
@@ -173,12 +178,12 @@ def load_data(city, month, day):
 
 #-----------------------------------------------------------------------------------------------
 
-def time_stats(df, month_str, day_str):
+def time_stats(df, city_str, month_str, day_str):
     """Displays statistics on the most frequent times of travel."""
     
     most_freq_hour = ''
 
-    print('\nCalculating The Most Frequent Times of Travel...\n')
+    print('\nCalculating The Most Frequent Times of Travel in {}...\n'.format(city_str))
     start_time = time.time()
 
     df['day_of_week'] = pd.to_datetime(df['Start Time']).dt.dayofweek
@@ -254,7 +259,8 @@ def time_stats(df, month_str, day_str):
 #-----------------------------------------------------------------------------------------------
 
 def convert_hour_am_pm(hour):
-
+    """converts from 24 hour format and adds AM or PM to provide a more decriptive hour output"""
+    
     if hour > 12:
         hour = hour - 12
         if hour == 0:
@@ -270,34 +276,34 @@ def convert_hour_am_pm(hour):
 
 #-----------------------------------------------------------------------------------------------
 
-def station_stats(df):
+def station_stats(df, city_str):
     """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and Trips...\n')
+    print('\nCalculating The Most Popular Stations and Trips for {}...\n'.format(city_str))
     start_time = time.time()
 
     # TO DO: display most commonly used start station
     print()
-    print('Most commonly used start station is {}'.format(df['Start Station'].mode()[0]))
+    print('Most commonly used start station in {} is {}'.format(city_str, df['Start Station'].mode()[0]))
 
     # TO DO: display most commonly used end station
     print()
-    print('Most commonly used end station is {}'.format(df['End Station'].mode()[0]))
+    print('Most commonly used end station in {} is {}'.format(city_str, df['End Station'].mode()[0]))
 
     # TO DO: display most frequent combination of start station and end station trip
     print()
     most_freq_station_comb = df['Start Station'] + ' to ' + df['End Station']
-    print('The most frequent combination of start station and end station (trip) is {}'.format(most_freq_station_comb.mode()[0]))
+    print('The most frequent combination of start station and end station (trip) in {} is {}'.format(city_str, most_freq_station_comb.mode()[0]))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 #-----------------------------------------------------------------------------------------------
 
-def trip_duration_stats(df):
+def trip_duration_stats(df, city_str):
     """Displays statistics on the total and average trip duration."""
 
-    print('\nCalculating Trip Duration Information...\n')
+    print('\nCalculating Trip Duration Information for {}...\n'.format(city_str))
     start_time = time.time()
     travel_durations = pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time'])
 
@@ -324,10 +330,10 @@ def trip_duration_stats(df):
 
 #-----------------------------------------------------------------------------------------------
 
-def user_stats(df):
+def user_stats(df, city_str):
     """Displays statistics on bikeshare users."""
 
-    print('\nCalculating User Stats..\n')
+    print('\nCalculating User Stats for {}...\n'.format(city_str))
     start_time = time.time()
 
     # TO DO: Display counts of user types
@@ -343,17 +349,18 @@ def user_stats(df):
         print('No gender data available.')
     else:
         gndr_of_usrs = df.groupby('Gender', as_index = False).count()
-        print('Number of user genders : {}'.format(len(gndr_of_usrs)))
+        print('Number of user genders in {}: {}'.format(city_str, len(gndr_of_usrs)))
         for i in range(len(gndr_of_usrs)):
             print('{}s - {}'.format(gndr_of_usrs['Gender'][i], gndr_of_usrs['Start Time'][i]))
-        print('There is no gender data available for the {}.'.format(len(df) - gndr_of_usrs['Start Time'][0] - gndr_of_usrs['Start Time'][1]))
+        print('There is no gender data available for the {} users in {}.'.format(len(df) - gndr_of_usrs['Start Time'][0] - gndr_of_usrs['Start Time'][1], city_str))
 
     # TO DO: Display earliest, most recent, and most common year of birth
     print()
     if 'Birth Year' not in df:
-        print('Birth year data is not available.')
+        print('Birth year data is not available for {}.'.format(city_str))
     else:
         birth = df.groupby('Birth Year', as_index = False).count()
+        print('For {}.'.format(city_str))
         print('Earliest year of birth was {}.'.format(int(birth['Birth Year'].min())))
         print('Most recent year of birth was {}.'.format(int(birth['Birth Year'].max())))
         print('Most common year of birth year was {}.'.format(int(birth.iloc[birth['Start Time'].idxmax()]['Birth Year'])))
@@ -363,8 +370,8 @@ def user_stats(df):
 
 #-----------------------------------------------------------------------------------------------
 
-def display_data(df):
-    choice = input('Would you like to read some of the raw data (Y)es or (N)o').lower()
+def display_data(df, city_str):
+    choice = input('Would you like to read some of the raw data for {}? (Y)es or (N)o '.format(city_str)).lower()
     print()
     
     if choice == "y":
@@ -384,7 +391,7 @@ def display_data(df):
             for i in range(5):
                 print(df.iloc[i])
                 print()
-            choice = input('Do wish to seee another five results? (Y)es or (N)o').lower()
+            choice = input('Do wish to seee another five results for {}? (Y)es or (N)o '.format(city_str)).lower()
             
             if choice == "y":
                 choice = "yes"
@@ -412,13 +419,13 @@ def main():
     while True:
         end_cntr = 0
         
-        city, month, day, month_str, day_str = get_filters()
+        city, month, day, city_str, month_str, day_str = get_filters()
         df = load_data(city, month, day)
-        time_stats(df, month_str, day_str)
-        station_stats(df)
-        trip_duration_stats(df)
-        user_stats(df)
-        display_data(df)
+        time_stats(df, city_str, month_str, day_str)
+        station_stats(df, city_str)
+        trip_duration_stats(df, city_str)
+        user_stats(df, city_str)
+        display_data(df, city_str)
         
         #ask user if they want to continue
         continue_or_surrender()
@@ -460,32 +467,8 @@ def continue_or_surrender():
                 print("\nThank you, bye.\n")
                 quit()
 
-#-----------------------------------------------------------------------------------------------
+
 
 if __name__ == "__main__":
-	main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    main()
 
