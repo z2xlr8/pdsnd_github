@@ -453,7 +453,7 @@ def continue_or_surrender():
         #terminate if no valid option is chosen more than 5 consecutive times
         if restart not in yay_nay_dic:
             print("Sorry, not a valid option.\n")
-            if end_cntr >= 5:
+            if end_cntr >= 10:
                 print("\nObviously you are done. Bye.\n")
                 quit()
             else:
