@@ -53,7 +53,8 @@ def get_filters():
     while True:
         try:
             city = input("Please select one of the following cities:\n(1) Chicago\n(2) New York City\n(3) Washington\nGet data for: ").lower()
-           
+            
+            """ convert numerical option data to alpha numeric equivalent """
             if city == '1':
                 city = 'chicago'
             elif city == '2':
@@ -109,7 +110,8 @@ def get_filters():
     while True:
         try:
             day = input("\nSelect a day of the week:\n(1) Sunday\n(2) Monday\n(3) Tuesday\n(4) Wednesday\n(5) Thursday\n(6) Friday\n(7) Saturday\n(8) All, to select the entire week\nGet data for: ").lower()
- 
+            
+            """ convert numerical option data to alpha numeric equivalent """
             if day == 'sun' or day == '1':
                 day = 'sunday'
             elif day == 'mon' or day == '2':
@@ -139,9 +141,11 @@ def get_filters():
         
     print('-'*40)
     
+    #month_str, day_str - used to provide decriptive data in results
     month_str = month.title()
     day_str = day.title()
     
+    #city, month, day - used in data analysis
     city = city_dic[city]
     month = month_dic[month]
     day = week_dic[day]
@@ -254,6 +258,7 @@ def time_stats(df, month_str, day_str):
 #-----------------------------------------------------------------------------------------------
 
 def convert_hour_am_pm(hour):
+    """converts from 24 hour format and adds AM or PM to provide a more decriptive hour output"""
 
     if hour > 12:
         hour = hour - 12
