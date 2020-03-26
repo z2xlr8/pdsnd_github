@@ -110,7 +110,7 @@ def get_filters():
     while True:
         try:
             day = input("\nSelect a day of the week:\n(1) Sunday\n(2) Monday\n(3) Tuesday\n(4) Wednesday\n(5) Thursday\n(6) Friday\n(7) Saturday\n(8) All, to select the entire week\nGet data for: ").lower()
- 
+            
             """ convert numerical option data to alpha numeric equivalent """
             if day == 'sun' or day == '1':
                 day = 'sunday'
