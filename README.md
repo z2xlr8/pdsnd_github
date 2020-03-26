@@ -21,7 +21,7 @@ The program breaks down data into four different categories
 	* Station statistics
 	* Trip duration statistics
 	* User/gender statistics
-	
+
 ### Files used
 data/chicago.csv
 data/new_york_city.csv
