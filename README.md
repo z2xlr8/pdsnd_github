@@ -17,6 +17,7 @@ It allows the user to select...
 
 It also allows the user to restart the program to analyze another city or terminate the program once their analysis is compelte.
 
+
 The program breaks down data into four different categories
 	* Time of day statistics
 	* Station statistics
