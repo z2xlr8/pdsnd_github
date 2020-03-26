@@ -1,15 +1,23 @@
 ### Date created
-Include the date you created this project and README file.
+March 26, 2020
 
-### Project Title
-Replace the Project Title
+### bikeshare_project
 
 ### Description
-Describe what your project is about and what it does
+This application analyzes bike share data for Chicago, New York City and Washington. 
+
+It allows the user to select...
+	* A city or multiple cities
+	* A month or all months 
+	* A day of the week or all days of the week 
+
+It also allows the user to restart the program to analyze another city or terminate the program once their analysis is compelte.
 
 ### Files used
-Include the files used
+data/chicago.csv
+data/new_york_city.csv
+data/washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+Udacity: Programming for Data Science Nanodegree Program
 
