@@ -4,6 +4,9 @@ March 26, 2020
 ### bikeshare_project
 
 ### Description
+#####Created with python version 3.7.6
+#####Python version 3.7.6 or higher should be used to run.
+
 This application analyzes bike share data for Chicago, New York City and Washington. 
 
 It allows the user to select...
