@@ -259,7 +259,6 @@ def time_stats(df, city_str, month_str, day_str):
 #-----------------------------------------------------------------------------------------------
 
 def convert_hour_am_pm(hour):
-<<<<<<< HEAD
 
     """converts from 24 hour format and adds AM or PM to provide a more decriptive hour output"""
     if hour > 12:
