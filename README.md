@@ -1,8 +1,7 @@
 ### Date created
-Include the date you created this project and README file.
+March 26, 2020
 
-### Project Title
-Replace the Project Title
+### bikeshare_project
 
 ### Description
 #####Created with python version 3.7.6
@@ -24,8 +23,10 @@ The program breaks down data into four different categories
 	* User/gender statistics
 
 ### Files used
-Include the files used
+data/chicago.csv
+data/new_york_city.csv
+data/washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+Udacity: Programming for Data Science Nanodegree Program
 
